@@ -26,6 +26,7 @@ export default function ForgotPassword() {
 
   return (
     <Flex h="100vh" w="100vw" className="login-container">
+     <Box w={{ base: '0%', md: '50%', lg: '60%' }} className="login-image-side" visibleFrom="md" />
       <Box w={{ base: '100%', md: '50%', lg: '40%' }} className="login-form-side">
         <Box w="100%" maw={450}>
           <Title ta="center" fw={700} size="h1">Forgot Password?</Title>
@@ -51,7 +52,6 @@ export default function ForgotPassword() {
           </Text>
         </Box>
       </Box>
-      <Box w={{ base: '0%', md: '50%', lg: '60%' }} className="login-image-side" visibleFrom="md" />
     </Flex>
   );
 }

@@ -45,6 +45,12 @@ export default function VerifyOtp() {
 
   return (
     <Flex h="100vh" w="100vw" className="login-container">
+    {/* Image Side */}
+      <Box 
+        w={{ base: '0%', md: '50%', lg: '60%' }} 
+        className="login-image-side"
+        visibleFrom="md"
+      />
       {/* Form Side */}
       <Box 
         w={{ base: '100%', md: '50%', lg: '40%' }} 
@@ -72,13 +78,6 @@ export default function VerifyOtp() {
           </form>
         </Box>
       </Box>
-
-      {/* Image Side */}
-      <Box 
-        w={{ base: '0%', md: '50%', lg: '60%' }} 
-        className="login-image-side"
-        visibleFrom="md"
-      />
     </Flex>
   );
 }
