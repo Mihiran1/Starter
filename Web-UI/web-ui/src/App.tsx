@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/login/Login';
 import Signup from './pages/SignUp/Signup';
+import VerifyOtp from './pages/VerifyOtp/VerifyOtp';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
             {/* 1. Public Routes (ඕනෑම කෙනෙකුට යන්න පුළුවන්) */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/verify-otp" element={<div>OTP Page (Coming Soon)</div>} />
+            <Route path="/verify-otp" element={<VerifyOtp />} />
 
             {/* 2. Protected Routes (ලොග් වුණු අයට විතරයි) */}
             <Route element={<ProtectedRoute />}>
