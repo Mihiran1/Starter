@@ -42,4 +42,16 @@ public class AuthController {
         userService.verifyOtp(request);
         return ResponseEntity.ok(ApiResponse.success("Account verified successfully. You can now login.", null));
     }
+        @PostMapping("/forgot-password")
+    public ResponseEntity<ApiResponse<String>> forgotPassword(@Valid @RequestBody com.poc.v1.dto.ForgotPasswordRequest request) {
+        userService.forgotPassword(request);
+        return ResponseEntity.ok(ApiResponse.success("OTP sent to your email", null));
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<ApiResponse<String>> resetPassword(@Valid @RequestBody com.poc.v1.dto.ResetPasswordRequest request) {
+        userService.resetPassword(request);
+        return ResponseEntity.ok(ApiResponse.success("Password reset successfully. You can now login.", null));
+    }
+
 }

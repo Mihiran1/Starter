@@ -6,6 +6,10 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/login/Login';
 import Signup from './pages/SignUp/Signup';
 import VerifyOtp from './pages/VerifyOtp/VerifyOtp';
+import DashboardLayout from './layouts/DashboardLayout';
+import Dashboard from './pages/Dashboard/Dashboard';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
 
 function App() {
   return (
@@ -17,15 +21,15 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/verify-otp" element={<VerifyOtp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
 
             {/* 2. Protected Routes (ලොග් වුණු අයට විතරයි) */}
             <Route element={<ProtectedRoute />}>
-              <Route path="/dashboard" element={
-                <div style={{ padding: '2rem' }}>
-                  <h1>Welcome to Dashboard!</h1>
-                  <p>You can only see this if you are logged in.</p>
-                </div>
-              } />
+              <Route element={<DashboardLayout />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                {/* Future routes like /settings or /profile will go here */}
+              </Route>
             </Route>
 
             {/* වැරදි URL එකක් ගැහුවොත්, කෙලින්ම Dashboard එකට හෝ Login එකට යවනවා */}

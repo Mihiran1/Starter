@@ -73,7 +73,7 @@ export default function Login() {
 
             <Group justify="space-between" mt="md" mb={5}>
               <Text fw={600} fz={{ base: 'sm', lg: 'md' }} component="label" htmlFor="password-input">Password</Text>
-              <Anchor component="button" fz={{ base: 'xs', lg: 'sm' }} color="dimmed" onClick={(e) => e.preventDefault()}>
+              <Anchor component="button" fz={{ base: 'xs', lg: 'sm' }} color="dimmed" onClick={(e) => { e.preventDefault(); navigate('/forgot-password'); }}>
                 Forgot your password?
               </Anchor>
             </Group>

@@ -113,4 +113,42 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         otpTokenRepository.delete(otpToken);
     }
+
+        @Override
+    public void forgotPassword(com.poc.v1.dto.ForgotPasswordRequest request) {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new com.poc.v1.exception.ApplicationException(
+                        "User not found with this email", org.springframework.http.HttpStatus.NOT_FOUND, "USER_NOT_FOUND"));
+
+        // අදාළ ඊමේල් එකට අලුත් OTP එකක් යවනවා
+        otpService.generateAndSendOtp(user.getEmail());
+    }
+
+    @Override
+    @Transactional
+    public void resetPassword(com.poc.v1.dto.ResetPasswordRequest request) {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new com.poc.v1.exception.ApplicationException(
+                        "User not found", org.springframework.http.HttpStatus.NOT_FOUND, "USER_NOT_FOUND"));
+
+        com.poc.v1.entity.OtpToken otpToken = otpTokenRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new com.poc.v1.exception.ApplicationException(
+                        "No OTP found for this email", org.springframework.http.HttpStatus.BAD_REQUEST, "OTP_NOT_FOUND"));
+
+        if (!otpToken.getOtpCode().equals(request.getOtpCode())) {
+            throw new com.poc.v1.exception.ApplicationException(
+                    "Invalid OTP code", org.springframework.http.HttpStatus.BAD_REQUEST, "INVALID_OTP");
+        }
+
+        if (otpToken.getExpiresAt().isBefore(java.time.LocalDateTime.now())) {
+            throw new com.poc.v1.exception.ApplicationException(
+                    "OTP has expired", org.springframework.http.HttpStatus.BAD_REQUEST, "OTP_EXPIRED");
+        }
+
+        // OTP එක හරි නම්, අලුත් පාස්වර්ඩ් එක Save කරනවා
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
+        otpTokenRepository.delete(otpToken); // පාවිච්චි කරපු OTP එක අයින් කරනවා
+    }
+
 }
