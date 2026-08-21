@@ -3,7 +3,8 @@ import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css'; // Mantine Styles
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
-import Login from './pages/Login';
+import Login from './pages/login/Login';
+import Signup from './pages/SignUp/Signup';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           <Routes>
             {/* 1. Public Routes (ඕනෑම කෙනෙකුට යන්න පුළුවන්) */}
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<div>Signup Page (Coming Soon)</div>} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/verify-otp" element={<div>OTP Page (Coming Soon)</div>} />
 
             {/* 2. Protected Routes (ලොග් වුණු අයට විතරයි) */}

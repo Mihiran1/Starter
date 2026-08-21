@@ -3,7 +3,7 @@
 }
 
 .login-image-side {
-  background-image: url('../assets/LGN.jpg');
+  background-image: url('../../assets/LGN.jpg');
   background-size: cover;
   background-position: center;
 }

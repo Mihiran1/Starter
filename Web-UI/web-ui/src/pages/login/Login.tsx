@@ -11,8 +11,8 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
-import api from '../services/api';
-import { useAuth } from '../context/AuthContext';
+import api from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
 import './Login.css';
 
 export default function Login() {
@@ -46,14 +46,14 @@ export default function Login() {
     <Flex h="100vh" w="100vw" className="login-container">
 
       {/* Image Side */}
-      <Box 
-        w={{ base: '0%', md: '50%', lg: '60%' }} 
+      <Box
+        w={{ base: '0%', md: '50%', lg: '60%' }}
         className="login-image-side"
         visibleFrom="md"
       />
       {/* Form Side */}
-      <Box 
-        w={{ base: '100%', md: '50%', lg: '40%' }} 
+      <Box
+        w={{ base: '100%', md: '50%', lg: '40%' }}
         className="login-form-side"
       >
         <Box w="100%" maw={450}>
@@ -98,7 +98,6 @@ export default function Login() {
           </Text>
         </Box>
       </Box>
-
     </Flex>
   );
 }
