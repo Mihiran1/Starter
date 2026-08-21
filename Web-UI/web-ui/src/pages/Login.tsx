@@ -2,20 +2,18 @@ import {
   TextInput,
   PasswordInput,
   Anchor,
-  Paper,
   Title,
   Text,
   Group,
   Button,
   Box,
-  Divider,
+  Flex,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
-import { IconBrandApple, IconBrandGoogle, IconBrandMeta } from '@tabler/icons-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
-import bgImage from '../assets/login-bg.png';
+import './Login.css';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -45,89 +43,62 @@ export default function Login() {
   };
 
   return (
-    <Box 
-      style={{ 
-        backgroundColor: '#f9fafb', 
-        minHeight: '100vh', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        padding: '20px'
-      }}
-    >
-      <Paper radius="md" shadow="sm" style={{ overflow: 'hidden', display: 'flex', width: '100%', maxWidth: 900 }}>
-        {/* Left Side: Form */}
-        <Box w={{ base: '100%', md: '50%' }} p={40} style={{ backgroundColor: 'white' }}>
-          <Title ta="center" fw={700} size="h3">Welcome back</Title>
-          <Text c="dimmed" size="sm" ta="center" mt={5} mb={30}>
+    <Flex h="100vh" w="100vw" className="login-container">
+
+      {/* Image Side */}
+      <Box 
+        w={{ base: '0%', md: '50%', lg: '60%' }} 
+        className="login-image-side"
+        visibleFrom="md"
+      />
+      {/* Form Side */}
+      <Box 
+        w={{ base: '100%', md: '50%', lg: '40%' }} 
+        className="login-form-side"
+      >
+        <Box w="100%" maw={450}>
+          <Title ta="center" fw={700} size="h1">Welcome back</Title>
+          <Text c="dimmed" fz={{ base: 'sm', lg: 'md' }} ta="center" mt={5} mb={30}>
             Login to your Acme Inc account
           </Text>
 
           <form onSubmit={form.onSubmit(handleLogin)}>
             <TextInput
-              label={<Text fw={600} size="sm">Email</Text>}
+              label={<Text fw={600} fz={{ base: 'sm', lg: 'md' }}>Email</Text>}
               placeholder="m@example.com"
-              required
+              size="md"
+              // required
               {...form.getInputProps('email')}
             />
 
             <Group justify="space-between" mt="md" mb={5}>
-              <Text fw={600} size="sm" component="label" htmlFor="password-input">Password</Text>
-              <Anchor component="button" size="xs" color="dimmed" onClick={(e) => e.preventDefault()}>
+              <Text fw={600} fz={{ base: 'sm', lg: 'md' }} component="label" htmlFor="password-input">Password</Text>
+              <Anchor component="button" fz={{ base: 'xs', lg: 'sm' }} color="dimmed" onClick={(e) => e.preventDefault()}>
                 Forgot your password?
               </Anchor>
             </Group>
             <PasswordInput
               id="password-input"
               placeholder="Your password"
+              size="md"
               required
               {...form.getInputProps('password')}
             />
 
-            <Button fullWidth mt="xl" type="submit" color="black" radius="md">
+            <Button fullWidth mt="xl" size="md" type="submit" color="blue" radius="md">
               Login
             </Button>
           </form>
 
-          <Divider label="Or continue with" labelPosition="center" my="lg" />
-
-          <Group grow mb="md" mt="md">
-            <Button variant="default" radius="md" h={40}>
-              <IconBrandApple size={20} stroke={1.5} color="black" />
-            </Button>
-            <Button variant="default" radius="md" h={40}>
-              <IconBrandGoogle size={20} stroke={1.5} color="black" />
-            </Button>
-            <Button variant="default" radius="md" h={40}>
-              <IconBrandMeta size={20} stroke={1.5} color="black" />
-            </Button>
-          </Group>
-
-          <Text c="dimmed" size="sm" ta="center" mt="xl">
+          <Text c="dimmed" fz={{ base: 'sm', lg: 'md' }} ta="center" mt="xl">
             Don't have an account?{' '}
-            <Anchor size="sm" component="button" color="dimmed" style={{ textDecoration: 'underline' }} onClick={() => navigate('/signup')}>
+            <Anchor component="button" fz={{ base: 'sm', lg: 'md' }} color="dimmed" className="underline-link" onClick={() => navigate('/signup')}>
               Sign up
             </Anchor>
           </Text>
         </Box>
+      </Box>
 
-        {/* Right Side: Image/Placeholder */}
-        <Box 
-          w={{ base: '0%', md: '50%' }} 
-          style={{ 
-            backgroundColor: '#e5e7eb',
-            backgroundImage: `url(${bgImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-          visibleFrom="md"
-        />
-      </Paper>
-      
-      <Text c="dimmed" size="xs" ta="center" mt={25}>
-        By clicking continue, you agree to our <Anchor size="xs" color="dimmed" style={{ textDecoration: 'underline' }}>Terms of Service</Anchor> and <Anchor size="xs" color="dimmed" style={{ textDecoration: 'underline' }}>Privacy Policy</Anchor>.
-      </Text>
-    </Box>
+    </Flex>
   );
 }
